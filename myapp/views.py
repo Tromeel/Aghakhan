@@ -6,3 +6,21 @@ def index(request):
 
 def starter(request):
     return render(request,"starter-page.html")
+def about(request):
+    return render(request,"about.html")
+
+def services(request):
+    return render(request,"services.html")
+
+def doctors(request):
+    return render(request,"doctors.html")
+
+def appointment(request):
+    return render(request,"appointment.html")
+
+def departments(request):
+    return render(request,"departments.html")
+
+def contact(request):
+    return render(request,"contact.html")
+
