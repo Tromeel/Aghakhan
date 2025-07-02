@@ -2,6 +2,11 @@
 {% load static %}
 
 {% block content %}
+    {% for message in messages  %}
+        <p class="alert alert-warning">{{ message }}</p>
+
+    {% endfor %}
+
 	 <!-- Contact Section -->
     <section id="contact" class="contact section">
 
@@ -47,7 +52,8 @@
           </div>
 
           <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form method="post" >
+                {% csrf_token %}
               <div class="row gy-4">
 
                 <div class="col-md-6">

@@ -12,6 +12,7 @@ class Patient(models.Model):
     def __str__(self):
          return self.firstname + " " + self.lastname
 
+
 class Doctor(models.Model):
     fullname = models.CharField(max_length=100)
     doctorId = models.IntegerField
@@ -21,11 +22,34 @@ class Doctor(models.Model):
     def __str__(self):
         return self.fullname
 
+
 class Ward(models.Model):
     name = models.CharField(max_length=100)
     capacity = models.IntegerField()
     department = models.CharField(max_length=100)
     floor = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+
+class Appointment(models.Model):
+    name =models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    datetime =models.DateTimeField()
+    department = models.CharField(max_length=100)
+    doctor = models.CharField(max_length=100)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
 
     def __str__(self):
         return self.name
