@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from myapp.models import *
 from django.contrib import messages
 # Create your views here
@@ -30,7 +30,7 @@ def appointment(request):
         )
         myappointments.save()
         messages.success(request, "Your appointment has been submitted")
-        return redirect('/appointment')
+        return redirect('/show')
     else:
         return render(request, 'appointment.html')
 
@@ -48,7 +48,45 @@ def contact(request):
         )
         mycontacts.save()
         messages.success(request, "Your contact has been submitted")
-        return redirect('/contact')
+        return redirect('/showcontact')
     else:
         return render(request,'contact.html')
+
+def show(request):
+  all = Appointment.objects.all()
+  return render(request,'show.html',{'all':all})
+
+def delete(request,id):
+    myappoint=Appointment.objects.get(id=id)
+    myappoint.delete()
+    return redirect('/show')
+
+def deleteco(request,id):
+    mycontact=Contact.objects.get(id=id)
+    mycontact.delete()
+    return redirect('/showcontact')
+
+
+def showcontact(request):
+  allcontact = Contact.objects.all()
+  return render(request,'showcontact.html',{'allcontact':allcontact})
+
+
+def edit(request,id):
+    editappointment =get_object_or_404(Appointment,id=id)
+
+    if request.method == "POST":
+        editappointment.name = request.POST.get('name')
+        editappointment.email = request.POST.get('email')
+        editappointment.phone = request.POST.get('phone')
+        editappointment.datetime = request.POST.get('date')
+        editappointment.department = request.POST.get('department')
+        editappointment.doctor = request.POST.get('doctor')
+        editappointment.message = request.POST.get('message')
+
+        editappointment.save()
+        messages.success(request, 'Your appointment has been updated successfully')
+        return redirect('/show')
+    else:
+        return render(request,'edit.html',{'editappointment':editappointment})
 
