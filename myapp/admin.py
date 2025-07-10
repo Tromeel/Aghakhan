@@ -7,3 +7,6 @@ admin.site.register(Doctor)
 admin.site.register(Ward)
 admin.site.register(Appointment)
 admin.site.register(Contact)
+admin.site.register(Transaction)
+
+
